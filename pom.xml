@@ -6,7 +6,7 @@
 
     <groupId>org.dominokit</groupId>
     <artifactId>gwt-validation-api</artifactId>
-    <version>HEAD-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <packaging>gwt-lib</packaging>
     <name>gwt-validation-api</name>
