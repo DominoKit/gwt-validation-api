@@ -6,7 +6,7 @@
 
     <groupId>org.dominokit</groupId>
     <artifactId>gwt-validation-api</artifactId>
-    <version>1.0.0</version>
+    <version>HEAD-SNAPSHOT</version>
 
     <packaging>gwt-lib</packaging>
     <name>gwt-validation-api</name>
@@ -63,7 +63,7 @@
 
     <properties>
         <snapshot.version>HEAD-SNAPSHOT</snapshot.version>
-        <next.release.version>1.0.0</next.release.version>
+        <next.release.version>1.0.1</next.release.version>
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
