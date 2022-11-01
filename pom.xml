@@ -140,7 +140,7 @@
 
                     <!-- Configure branches -->
                     <gitFlowConfig>
-                        <productionBranch>main</productionBranch>
+                        <productionBranch>master</productionBranch>
                         <!-- default is develop, but we use development -->
                         <developmentBranch>development</developmentBranch>
                     </gitFlowConfig>
