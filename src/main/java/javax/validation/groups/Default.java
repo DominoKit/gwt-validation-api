@@ -1,30 +1,22 @@
 /*
- * Copyright © 2018 The GWT Authors
+ * Jakarta Bean Validation API
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * License: Apache License, Version 2.0
+ * See the license.txt file in the root directory or <http://www.apache.org/licenses/LICENSE-2.0>.
  */
 package javax.validation.groups;
 
 /**
- * Default Bean Validation group. Unless a list of group is explicitly defined:
- *
+ * Default Jakarta Bean Validation group.
+ * <p>
+ * Unless a list of groups is explicitly defined:
  * <ul>
- *   <li>constraints belong to the Default group
- *   <li>validation apply on the Default group
+ *     <li>constraints belong to the {@code Default} group</li>
+ *     <li>validation applies to the {@code Default} group</li>
  * </ul>
- *
  * Most structural constraints should belong to the default group.
  *
  * @author Emmanuel Bernard
  */
-public interface Default {}
+public interface Default {
+}
