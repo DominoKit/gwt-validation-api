@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.dominokit</groupId>
-    <artifactId>gwt-validation-api</artifactId>
-    <version>1.0.0</version>
+    <artifactId>gwt-validation-api-parent</artifactId>
+    <version>HEAD-SNAPSHOT</version>
 
-    <packaging>gwt-lib</packaging>
-    <name>gwt-validation-api</name>
+    <packaging>pom</packaging>
+    <name>gwt-validation-api-parent</name>
 
     <description>A minimal emulation of validation API for GWT/J2CL</description>
     <url>https://github.com/gwt-validation-api</url>
@@ -61,18 +61,23 @@
         </repository>
     </distributionManagement>
 
+    <modules>
+        <module>gwt-validation-api</module>
+        <module>gwt-time-emul</module>
+    </modules>
+
     <properties>
         <snapshot.version>HEAD-SNAPSHOT</snapshot.version>
-        <next.release.version>1.0.0</next.release.version>
+        <next.release.version>1.0.1</next.release.version>
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <maven.compiler.plugin>3.8.1</maven.compiler.plugin>
+        <maven.compiler.plugin>3.11.0</maven.compiler.plugin>
         <maven.source.plugin>3.0.1</maven.source.plugin>
-        <maven.javadoc.plugin>2.10.4</maven.javadoc.plugin>
+        <maven.javadoc.plugin>3.6.2</maven.javadoc.plugin>
         <maven.gpg.plugin>1.6</maven.gpg.plugin>
         <maven.nexus.staging.plugin>1.6.8</maven.nexus.staging.plugin>
         <maven.deploy.plugin>3.0.0-M1</maven.deploy.plugin>
@@ -80,7 +85,7 @@
         <maven.install.plugin>3.0.0-M1</maven.install.plugin>
         <maven.license.plugin>3.0</maven.license.plugin>
         <maven.surfire.plugin>3.0.0-M1</maven.surfire.plugin>
-        <maven.gwt.plugin>1.0.0</maven.gwt.plugin>
+        <maven.gwt.plugin>1.1.0</maven.gwt.plugin>
     </properties>
 
 
