@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.dominokit</groupId>
+        <artifactId>gwt-validation-api-parent</artifactId>
+        <version>HEAD-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>gwt-validation-api</artifactId>
+    <version>HEAD-SNAPSHOT</version>
+
+    <packaging>gwt-lib</packaging>
+    <name>gwt-validation-api</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.dominokit</groupId>
+            <artifactId>gwt-time-emul</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>net.ltgt.gwt.maven</groupId>
+                <artifactId>gwt-maven-plugin</artifactId>
+                <configuration>
+                    <moduleName>javax.validation.Validation</moduleName>
+                    <moduleShortName>javaxvalidtion</moduleShortName>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
