@@ -2,4 +2,4 @@
 
 # gwt-validation-api
 
-An emulation validation-api  version 1.0.0.GA that works on gwt and j2cl.
+An emulation validation-api that works on gwt and j2cl.
