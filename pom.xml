@@ -6,7 +6,7 @@
 
     <groupId>org.dominokit</groupId>
     <artifactId>gwt-validation-api-parent</artifactId>
-    <version>HEAD-SNAPSHOT</version>
+    <version>1.0.3</version>
 
     <packaging>pom</packaging>
     <name>gwt-validation-api-parent</name>
