@@ -1,72 +1,76 @@
+// $Id: Size.java 17620 2009-10-04 19:19:28Z hardy.ferentschik $
 /*
- * Jakarta Bean Validation API
- *
- * License: Apache License, Version 2.0
- * See the license.txt file in the root directory or <http://www.apache.org/licenses/LICENSE-2.0>.
- */
+* JBoss, Home of Professional Open Source
+* Copyright 2009, Red Hat, Inc. and/or its affiliates, and individual contributors
+* by the @authors tag. See the copyright.txt in the distribution for a
+* full listing of individual contributors.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+* http://www.apache.org/licenses/LICENSE-2.0
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 package javax.validation.constraints;
 
-import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
-import static java.lang.annotation.ElementType.CONSTRUCTOR;
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.PARAMETER;
-import static java.lang.annotation.ElementType.TYPE_USE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
-import java.lang.annotation.Documented;
-import java.lang.annotation.Repeatable;
-import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Documented;
+import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import javax.validation.constraints.Size.List;
 
 /**
  * The annotated element size must be between the specified boundaries (included).
  *
- * <p>Supported types are:
- *
+ * Supported types are:
  * <ul>
- *   <li>{@code CharSequence} (length of character sequence is evaluated)
- *   <li>{@code Collection} (collection size is evaluated)
- *   <li>{@code Map} (map size is evaluated)
- *   <li>Array (array length is evaluated)
- * </ul>
+ * <li><code>String</code> (string length is evaludated)</li>
+ * <li><code>Collection</code> (collection size is evaluated)</li>
+ * <li><code>Map</code> (map size is evaluated)</li>
+ * <li>Array (array length is evaluated)</li>
  *
- * <p>{@code null} elements are considered valid.
+ * <code>null</code> elements are considered valid.
  *
  * @author Emmanuel Bernard
  */
-@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
+@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
 @Retention(RUNTIME)
-@Repeatable(List.class)
 @Documented
 @Constraint(validatedBy = {})
 public @interface Size {
+	String message() default "{javax.validation.constraints.Size.message}";
+	
+	Class<?>[] groups() default {};
 
-  String message() default "{javax.validation.constraints.Size.message}";
+	Class<? extends Payload>[] payload() default {};
 
-  Class<?>[] groups() default {};
+	/**
+	 * @return size the element must be higher or equal to
+	 */
+	int min() default 0;
 
-  Class<? extends Payload>[] payload() default {};
+	/**
+	 * @return size the element must be lower or equal to
+	 */
+	int max() default Integer.MAX_VALUE;
 
-  /** @return size the element must be higher or equal to */
-  int min() default 0;
-
-  /** @return size the element must be lower or equal to */
-  int max() default Integer.MAX_VALUE;
-
-  /**
-   * Defines several {@link Size} annotations on the same element.
-   *
-   * @see Size
-   */
-  @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
-  @Retention(RUNTIME)
-  @Documented
-  @interface List {
-
-    Size[] value();
-  }
+	/**
+	 * Defines several <code>@Size</code> annotations on the same element
+	 * @see Size
+	 *
+	 * @author Emmanuel Bernard
+	 */
+	@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+	@Retention(RUNTIME)
+	@Documented
+	@interface List {
+		Size[] value();
+	}
 }

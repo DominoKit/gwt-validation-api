@@ -7,21 +7,16 @@
     <parent>
         <groupId>org.dominokit</groupId>
         <artifactId>gwt-validation-api-parent</artifactId>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
     </parent>
 
     <artifactId>gwt-validation-api</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 
     <packaging>gwt-lib</packaging>
     <name>gwt-validation-api</name>
 
     <dependencies>
-        <dependency>
-            <groupId>org.dominokit</groupId>
-            <artifactId>gwt-time-emul</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>

@@ -1,65 +1,60 @@
+// $Id: ConstraintViolationException.java 17620 2009-10-04 19:19:28Z hardy.ferentschik $
 /*
- * Jakarta Bean Validation API
- *
- * License: Apache License, Version 2.0
- * See the license.txt file in the root directory or <http://www.apache.org/licenses/LICENSE-2.0>.
- */
+* JBoss, Home of Professional Open Source
+* Copyright 2009, Red Hat, Inc. and/or its affiliates, and individual contributors
+* by the @authors tag. See the copyright.txt in the distribution for a
+* full listing of individual contributors.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+* http://www.apache.org/licenses/LICENSE-2.0
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 package javax.validation;
 
-import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
- * Reports the result of constraint violations.
- *
+ * Reports the result of constraint violations
+ *                                                    `
  * @author Emmanuel Bernard
- * @author Gunnar Morling
- * @author Guillaume Smet
  */
 public class ConstraintViolationException extends ValidationException {
+	private final Set<ConstraintViolation<?>> constraintViolations;
 
-  private final Set<ConstraintViolation<?>> constraintViolations;
+	/**
+	 * Creates a constraint violation report
+	 *
+	 * @param message error message
+	 * @param constraintViolations <code>Set</code> of <code>ConstraintViolation</code>
+	 */
+	public ConstraintViolationException(String message,
+										Set<ConstraintViolation<?>> constraintViolations) {
+		super( message );
+		this.constraintViolations = constraintViolations;
+	}
 
-  /**
-   * Creates a constraint violation report.
-   *
-   * @param message error message
-   * @param constraintViolations a {@code Set} of {@link ConstraintViolation}s or null
-   */
-  public ConstraintViolationException(
-      String message, Set<? extends ConstraintViolation<?>> constraintViolations) {
-    super(message);
+	/**
+	 * Creates a constraint violation report
+	 *
+	 * @param constraintViolations <code>Set</code> of <code>ConstraintViolation</code>
+	 */
+	public ConstraintViolationException(Set<ConstraintViolation<?>> constraintViolations) {
+		super();
+		this.constraintViolations = constraintViolations;
+	}
 
-    if (constraintViolations == null) {
-      this.constraintViolations = null;
-    } else {
-      this.constraintViolations = new HashSet<>(constraintViolations);
-    }
-  }
-
-  /**
-   * Creates a constraint violation report.
-   *
-   * @param constraintViolations a {@code Set} of {@link ConstraintViolation}s or null
-   */
-  public ConstraintViolationException(Set<? extends ConstraintViolation<?>> constraintViolations) {
-    this(
-        constraintViolations != null ? toString(constraintViolations) : null, constraintViolations);
-  }
-
-  /**
-   * Returns the set of constraint violations reported during a validation.
-   *
-   * @return the {@code Set} of {@link ConstraintViolation}s or null
-   */
-  public Set<ConstraintViolation<?>> getConstraintViolations() {
-    return constraintViolations;
-  }
-
-  private static String toString(Set<? extends ConstraintViolation<?>> constraintViolations) {
-    return constraintViolations.stream()
-        .map(cv -> cv == null ? "null" : cv.getPropertyPath() + ": " + cv.getMessage())
-        .collect(Collectors.joining(", "));
-  }
+	/**
+	 * Set of constraint violations reported during a validation
+	 *
+	 * @return <code>Set</code> of <code>ConstraintViolation</code>
+	 */
+	public Set<ConstraintViolation<?>> getConstraintViolations() {
+		return constraintViolations;
+	}
 }
