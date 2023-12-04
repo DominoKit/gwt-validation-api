@@ -1,107 +1,89 @@
+// $Id: ValidatorFactory.java 17620 2009-10-04 19:19:28Z hardy.ferentschik $
 /*
- * Jakarta Bean Validation API
- *
- * License: Apache License, Version 2.0
- * See the license.txt file in the root directory or <http://www.apache.org/licenses/LICENSE-2.0>.
- */
+* JBoss, Home of Professional Open Source
+* Copyright 2009, Red Hat, Inc. and/or its affiliates, and individual contributors
+* by the @authors tag. See the copyright.txt in the distribution for a
+* full listing of individual contributors.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+* http://www.apache.org/licenses/LICENSE-2.0
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 package javax.validation;
 
 /**
- * Factory returning initialized {@code Validator} instances.
- *
- * <p>Implementations are thread-safe and instances are typically cached and reused.
+ * Factory returning initialized <code>Validator</code> instances.
+ * Implementations are thread-safe
+ * This object is typically cached and reused.
  *
  * @author Emmanuel Bernard
- * @author Gunnar Morling
- * @author Hardy Ferentschik
- * @author Guillaume Smet
  */
-public interface ValidatorFactory extends AutoCloseable {
+public interface ValidatorFactory {
+	/**
+	 * Returns an initialized <code>Validator</code> instance using the
+	 * factory defaults for message interpolator, traversable resolver
+	 * and constraint validator factory.
+	 * <p>
+	 * Validator instances can be pooled and shared by the implementation.
+	 * </p>
+	 * @return an initialized <code>Validator</code> instance
+	 */
+	Validator getValidator();
 
-  /**
-   * Returns an initialized {@link Validator} instance using the factory defaults for message
-   * interpolator, traversable resolver and constraint validator factory.
-   *
-   * <p>Validator instances can be pooled and shared by the implementation.
-   *
-   * @return an initialized {@code Validator} instance
-   */
-  Validator getValidator();
+	/**
+	 * Defines a new validator context and return a <code>Validator</code>
+	 * compliant this new context.
+	 *
+	 * @return a <code>ValidatorContext</code>.
+	 */
+	ValidatorContext usingContext();
 
-  /**
-   * Defines a new validator context and returns a {@code Validator} compliant this new context.
-   *
-   * @return a {@link ValidatorContext} instance
-   */
-  ValidatorContext usingContext();
+	/**
+	 * Returns the <code>MessageInterpolator</code> instance configured at
+	 * initialization time for the <code>ValidatorFactory<code>.
+	 * This is the instance used by #getValidator().
+	 *
+	 * @return MessageInterpolator instance.
+	 */
+	MessageInterpolator getMessageInterpolator();
 
-  /**
-   * Returns the {@link MessageInterpolator} instance configured at initialization time for the
-   * {@code ValidatorFactory}. This is the instance used by {@link #getValidator()}.
-   *
-   * @return {@code MessageInterpolator} instance
-   */
-  MessageInterpolator getMessageInterpolator();
+	/**
+	 * Returns the <code>TraversableResolver</code> instance configured
+	 * at initialization time for the <code>ValidatorFactory<code>.
+	 * This is the instance used by #getValidator().
+	 *
+	 * @return TraversableResolver instance.
+	 */
+	TraversableResolver getTraversableResolver();
 
-  /**
-   * Returns the {@link TraversableResolver} instance configured at initialization time for the
-   * {@code ValidatorFactory}. This is the instance used by {@link #getValidator()}.
-   *
-   * @return {@code TraversableResolver} instance
-   */
-  TraversableResolver getTraversableResolver();
+	/**
+	 * Returns the <code>ConstraintValidatorFactory</code> instance
+	 * configured at initialization time for the
+	 * <code>ValidatorFactory<code>.
+	 * This is the instance used by #getValidator().
+	 *
+	 * @return ConstraintValidatorFactory instance.
+	 */
+	ConstraintValidatorFactory getConstraintValidatorFactory();
 
-  /**
-   * Returns the {@link ConstraintValidatorFactory} instance configured at initialization time for
-   * the {@code ValidatorFactory}. This is the instance used by {@link #getValidator()}.
-   *
-   * @return {@code ConstraintValidatorFactory} instance
-   */
-  ConstraintValidatorFactory getConstraintValidatorFactory();
-
-  /**
-   * Returns the {@link ParameterNameProvider} instance configured at initialization time for the
-   * {@code ValidatorFactory}. This is the instance used by #getValidator().
-   *
-   * @return {@code ParameterNameProvider} instance
-   * @since 1.1
-   */
-  ParameterNameProvider getParameterNameProvider();
-
-  /**
-   * Returns the {@link ClockProvider} instance configured at initialization time for the {@code
-   * ValidatorFactory}. This is the instance used by #getValidator().
-   *
-   * @return {@code ClockProvider} instance
-   * @since 2.0
-   */
-  ClockProvider getClockProvider();
-
-  /**
-   * Returns an instance of the specified type allowing access to provider-specific APIs. If the
-   * Jakarta Bean Validation provider implementation does not support the specified class, a {@code
-   * ValidationException} is thrown.
-   *
-   * @param type the class of the object to be returned
-   * @param <T> the type of the object to be returned
-   * @return an instance of the specified class
-   * @throws ValidationException if the provider does not support the call.
-   */
-  public <T> T unwrap(Class<T> type);
-
-  /**
-   * Closes the {@code ValidatorFactory} instance.
-   *
-   * <p>After the {@code ValidatorFactory} instance is closed, calling the following methods is not
-   * allowed:
-   *
-   * <ul>
-   *   <li>methods of this {@code ValidatorFactory} instance
-   *   <li>methods of {@link Validator} instances created by this {@code ValidatorFactory}
-   * </ul>
-   *
-   * @since 1.1
-   */
-  @Override
-  public void close();
+	/**
+	 * Return an instance of the specified type allowing access to
+	 * provider-specific APIs. If the Bean Validation provider
+	 * implementation does not support the specified class,
+	 * <code>ValidationException,</code> is thrown.
+	 *
+	 * @param type  the class of the object to be returned.
+	 *
+	 * @return an instance of the specified class.
+	 *
+	 * @throws ValidationException if the provider does not
+	 *         support the call.
+	 */
+	public <T> T unwrap(Class<T> type);
 }

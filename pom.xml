@@ -63,7 +63,6 @@
 
     <modules>
         <module>gwt-validation-api</module>
-        <module>gwt-time-emul</module>
     </modules>
 
     <properties>
@@ -87,7 +86,6 @@
         <maven.surfire.plugin>3.0.0-M1</maven.surfire.plugin>
         <maven.gwt.plugin>1.1.0</maven.gwt.plugin>
     </properties>
-
 
     <build>
         <plugins>

@@ -1,85 +1,68 @@
+// $Id: Past.java 17620 2009-10-04 19:19:28Z hardy.ferentschik $
 /*
- * Jakarta Bean Validation API
- *
- * License: Apache License, Version 2.0
- * See the license.txt file in the root directory or <http://www.apache.org/licenses/LICENSE-2.0>.
- */
+* JBoss, Home of Professional Open Source
+* Copyright 2009, Red Hat, Inc. and/or its affiliates, and individual contributors
+* by the @authors tag. See the copyright.txt in the distribution for a
+* full listing of individual contributors.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+* http://www.apache.org/licenses/LICENSE-2.0
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 package javax.validation.constraints;
 
-import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
-import static java.lang.annotation.ElementType.CONSTRUCTOR;
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.PARAMETER;
-import static java.lang.annotation.ElementType.TYPE_USE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
 import java.lang.annotation.Documented;
-import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Target;
-import javax.validation.ClockProvider;
+import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.ElementType.PARAMETER;
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-import javax.validation.constraints.Past.List;
 
 /**
- * The annotated element must be an instant, date or time in the past.
- *
- * <p><i>Now</i> is defined by the {@link ClockProvider} attached to the {@link Validator} or {@link
- * ValidatorFactory}. The default {@code clockProvider} defines the current time according to the
- * virtual machine, applying the current default time zone if needed.
- *
- * <p>Supported types are:
- *
+ * The annotated element must be a date in the past.
+ * Now is defined as the current time according to the virtual machine
+ * The calendar used if the compared type is of type <code>Calendar</code>
+ * is the calendar based on the current timezone and the current locale.
+ * <p/>
+ * Supported types are:
  * <ul>
- *   <li>{@code java.util.Date}
- *   <li>{@code java.util.Calendar}
- *   <li>{@code java.time.Instant}
- *   <li>{@code java.time.LocalDate}
- *   <li>{@code java.time.LocalDateTime}
- *   <li>{@code java.time.LocalTime}
- *   <li>{@code java.time.MonthDay}
- *   <li>{@code java.time.OffsetDateTime}
- *   <li>{@code java.time.OffsetTime}
- *   <li>{@code java.time.Year}
- *   <li>{@code java.time.YearMonth}
- *   <li>{@code java.time.ZonedDateTime}
- *   <li>{@code java.time.chrono.HijrahDate}
- *   <li>{@code java.time.chrono.JapaneseDate}
- *   <li>{@code java.time.chrono.MinguoDate}
- *   <li>{@code java.time.chrono.ThaiBuddhistDate}
+ * <li><code>java.util.Date</code></li>
+ * <li><code>java.util.Calendar</code></li>
  * </ul>
- *
- * <p>{@code null} elements are considered valid.
+ * <p/>
+ * <code>null</code> elements are considered valid.
  *
  * @author Emmanuel Bernard
  */
-@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
+@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
 @Retention(RUNTIME)
-@Repeatable(List.class)
 @Documented
 @Constraint(validatedBy = {})
 public @interface Past {
+	String message() default "{javax.validation.constraints.Past.message}";
 
-  String message() default "{javax.validation.constraints.Past.message}";
+	Class<?>[] groups() default { };
 
-  Class<?>[] groups() default {};
+	Class<? extends Payload>[] payload() default {};
 
-  Class<? extends Payload>[] payload() default {};
-
-  /**
-   * Defines several {@link Past} annotations on the same element.
-   *
-   * @see Past
-   */
-  @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
-  @Retention(RUNTIME)
-  @Documented
-  @interface List {
-
-    Past[] value();
-  }
+	/**
+	 * Defines several <code>@Past</code> annotations on the same element
+	 * @see Past
+	 *
+	 * @author Emmanuel Bernard
+	 */
+	@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+	@Retention(RUNTIME)
+	@Documented
+	@interface List {
+		Past[] value();
+	}
 }
