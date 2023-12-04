@@ -7,11 +7,11 @@
     <parent>
         <groupId>org.dominokit</groupId>
         <artifactId>gwt-validation-api-parent</artifactId>
-        <version>1.0.3</version>
+        <version>HEAD-SNAPSHOT</version>
     </parent>
 
     <artifactId>gwt-validation-api</artifactId>
-    <version>1.0.3</version>
+    <version>HEAD-SNAPSHOT</version>
 
     <packaging>gwt-lib</packaging>
     <name>gwt-validation-api</name>
